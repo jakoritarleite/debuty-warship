@@ -1,0 +1,14 @@
+{
+	"name": "Debuty Warship",
+	"description": "Discord Bot for the Debuty Security Server.",
+	"version": "0.0.0",
+	"main": "bot.js",
+	"scripts": {
+		"start": "node bot.js"
+	},
+	"dependencies": {
+		"@discordjs/opus": "^0.3.2",
+		"discord.js": "^12.2.0",
+		"request": "^2.88.2"
+	}
+}
