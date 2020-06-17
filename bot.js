@@ -26,7 +26,7 @@ client.on('message', message => {
 			.setDescription()
 		message.channel.send(embed);
 
-		//message.reply("Wait, I'm being developed.");
+		message.reply("Wait, I'm being developed.");
 	}
 });
 
