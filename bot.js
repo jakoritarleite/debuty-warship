@@ -20,11 +20,11 @@ client.on('message', message => {
 	}
 
 	else if (command === 'live') {
-		const embed = new MessageEmbed()
-			.setTitle("Wait, I'm being developed.")
-			.setColor(0xff0000)
-			.setDescription()
-		message.channel.send(embed);
+		//const embed = new MessageEmbed()
+		//	.setTitle("Wait, I'm being developed.")
+		//	.setColor(0xff0000)
+		//	.setDescription()
+		//message.channel.send(embed);
 
 		message.reply("Wait, I'm being developed.");
 	}
