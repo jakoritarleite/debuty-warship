@@ -25,10 +25,7 @@ client.on('message', message => {
 		const embed = new MessageEmbed()
 			.setTitle("Wait, I'm being developed.")
 			.setColor(0xff0000)
-			.setDescription()
 		message.channel.send(embed);
-
-		message.reply("WTF is live ?");
 	}
 });
 
