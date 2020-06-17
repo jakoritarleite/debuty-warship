@@ -14,6 +14,20 @@ client.on('message', message => {
 	else if (command === 'hello') {
 		message.reply('Hi ?');
 	}
+
+	else if (command === 'avatar') {
+		message.reply(message.author.displayAvatarURL());
+	}
+
+	else if (command === 'live') {
+		cosnt embed = new MessageEmbed()
+			.setTitle("Wait, I'm being developed.")
+			.setColor(0xff0000)
+			.setDescription()
+		message.channel.send(embed);
+
+		//message.reply("Wait, I'm being developed.");
+	}
 });
 
 client.login(process.env.BOT_TOKEN);
