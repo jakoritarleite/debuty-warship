@@ -3,11 +3,26 @@
 	"description": "Discord Bot for the Debuty Security Server.",
 	"version": "0.0.0",
 	"main": "bot.js",
+	"engines": {
+		"node": "14.4.0",
+		"npm": "*"
+	},
 	"scripts": {
 		"start": "node bot.js"
 	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jakoritarleite/debuty-warship.git"
+	},
+	"keywords": ["heroku", "discord.js"],
+	"author": "jakoritarleite",
+	"licence": "GPL 3.0",
+	"bugs": {
+		"url": "https://github.com/jakoritarleite/debuty-warship/issues"
+	},
 	"dependencies": {
-		"discord.js": "^12.2.0",
-		"request": "^2.88.2"
+		"discord.js": "^12.2.0"
 	}
 }
+
+
