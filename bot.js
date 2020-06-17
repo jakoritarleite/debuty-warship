@@ -8,4 +8,4 @@ client.on('message', message => {
 	}
 });
 
-client.login('NzIyNjg0ODg5OTAzNjYxMDU2.XumrEg.cleU6rXzUQzdbYMI00qaIZPaHkA');
+client.login(process.env.BOT_TOKEN);
