@@ -1,7 +1,7 @@
 {
-	"name": "Debuty Warship",
+	"name": "debuty-warship",
+	"version": "0.0.1",
 	"description": "Discord Bot for the Debuty Security Server.",
-	"version": "0.0.0",
 	"main": "bot.js",
 	"engines": {
 		"node": "14.4.0",
@@ -14,15 +14,17 @@
 		"type": "git",
 		"url": "git+https://github.com/jakoritarleite/debuty-warship.git"
 	},
-	"keywords": ["heroku", "discord.js"],
+	"keywords": [
+		"heroku",
+		"discord.js"
+	],
 	"author": "jakoritarleite",
 	"licence": "GPL 3.0",
 	"bugs": {
 		"url": "https://github.com/jakoritarleite/debuty-warship/issues"
 	},
+	"homepage": "https://github.com/jakoritarleite/debuty-warship#readme",
 	"dependencies": {
 		"discord.js": "^12.2.0"
 	}
 }
-
-
