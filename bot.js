@@ -62,7 +62,7 @@ client.on('message', async message => {
 						}
 					}
 				});
-				console.log('music': + music);
+				console.log('music: ' + music);
 				Play(music, serverQueue);
 			}
 		} else {
