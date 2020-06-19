@@ -44,14 +44,19 @@ client.on('message', async message => {
 			const connection = await message.member.voice.channel.join();
 
 			if (args.startsWith('http')) {
-				connection.play(ytdl(args, { filter: 'audioonly' }));
+				connection.play(ytdl(args, { filter: 'audioonly' }), { type: 'webm/opus' });
 			}
 			else {
 				YouTube.search.list({ part: 'snippet', q: 'lofi brazil' }, function (err, data) {
 					if (err) console.error('Error: ' + err);
 					
 					if (data) {
-						connection.play(ytdl(data.data.items[0], { filter: 'audioonly' }));
+						const embed = new MessageEmbed()
+							.setTitle(data.data.items[0].snippet.tittle)
+							.setColor(0x636466)
+						message.channel.send(embed);
+
+						connection.play(ytdl('https://www.youtube.com/watch?v=' + data.data.items[0].id.videoId, { filter: 'audioonly' }), { type: 'webm/opus' });
 					}
 				});
 			}
