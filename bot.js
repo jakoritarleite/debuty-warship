@@ -95,7 +95,7 @@ async function Execute(message, music, serverQueue) {
 		};
 
 		queue.set(message.guild.id, queueContruct);
-		queueContruct.songs.push(music);
+		queueContruct.songs.push(song);
 
 		try {
 			const connection = await voiceChannel.join();
@@ -133,6 +133,6 @@ function Play(guild, music) {
 			play(guild, serverQueue.songs[0]);
 		})
 		.on("error", error => console.error('Error: ' + error));
-	serverQueue.textChannel.send(`Start playing: **${song.title}**`);
+	serverQueue.textChannel.send(`Start playing: **${music}**`);
 	console.log('Playing the song');
 }
