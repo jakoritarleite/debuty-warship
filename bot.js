@@ -1,8 +1,5 @@
 'use strict';
 
-let isMusicOn = false;
-let musicQueue = []
-
 const Google = require('googleapis');
 const ytdl = require('ytdl-core');
 const { Client, MessageEmbed } = require('discord.js');
@@ -15,11 +12,16 @@ const YouTube = new Google.youtube_v3.Youtube({
 	auth: process.env.YOUTUBE_KEY
 });
 
+const queue = new Map();
+
 client.on('ready', () => { console.log('I am ready!') });
 client.on('message', async message => {
 	if (!message.content.startsWith(process.env.PREFIX) || !message.guild) return;
+	
 	const command = message.content.split(' ')[0].substr(process.env.PREFIX.length);
 	const args = message.content.split(' ').slice(1).join(' ');
+
+	const serverQueue = queue.get(message.guild.id);
 
 	if (command === 'ping') {
 		message.reply('pong :ping_pong:');
@@ -44,48 +46,40 @@ client.on('message', async message => {
 		if (!message.guild) return;
 
 		if (message.member.voice.channel && message.member.voice.channel.id == '720457254578683945') {
-			const connection = await message.member.voice.channel.join();
-
-			YouTube.search.list({ part: 'snippet', q: args }, function (err, data) {
-				if (err) console.error('Error: ' + err);
-					
-				if (data) {
-					for (var index = 0; index < data.data.items.length; index++) {
-						if (data.data.items[index].id.videoId != undefined) {
-							musicQueue.push('https://www.youtube.com/watch?v=' + data.data.items[index].id.videoId);
-
-							if (isMusicOn) {
-								const embed = new MessageEmbed()
-									.setColor(0x636466)
-									.setTitle('Queued music')
-									.setDescription('[' + data.data.items[index].snippet.title + ']' + '(https://www.youtube.com/watch?v=' + data.data.items[index].id.videoId + ')')
-								message.channel.send(embed);
-
-								break;
-							} else {
-								isMusicOn = true;
-								const embed = new MessageEmbed()
-									.setColor(0x636466)
-									.setTitle('Now playing')
-									.setDescription('[' + data.data.items[index].snippet.title + ']' + '(https://www.youtube.com/watch?v=' + data.data.items[index].id.videoId + ')')
-								message.channel.send(embed);
-
-								break;
-							}
-						}
-					}
-				}
-			});
-
-			Play(connection);
-
+			Play(args, serverQueue)
 		} else {
 			message.reply('You need to join the music channel first!');
 		}
 	}
 });
 
-async function Play(connection) {
-	await connection.play(ytdl(musicQueue[0], { filter: 'audioonly' }), { type: 'webm/opus' });
-	musicQueue.slice(0, 1);
+aync function Play(song, serverQueue) {
+	if (!song.startsWith('http')) {
+		await YouTube.search.list({ part: 'snippet', q: args }, aync function (err, response) {
+			if (err) console.error('Error: ' + err);
+		
+			if (response) {
+				console.log(response);
+			}
+		});
+	}
+
+	const songInfo = await ytdl.getInfo(song);
+
+	console.log(songInfo);
+
 }
+
+
+const connection = await message.member.voice.channel.join();
+
+			YouTube.search.list({ part: 'snippet', q: args }, function (err, data) {
+				if (err) console.error('Error: ' + err);
+					
+				if (data) {
+					const embed = new MessageEmbed()
+						.setColor(0x636466)
+						.setTitle('Queued music')
+						.setDescription('[' + data.data.items[index].snippet.title + ']' + '(https://www.youtube.com/watch?v=' + data.data.items[index].id.videoId + ')')
+					message.channel.send(embed);
+			});
