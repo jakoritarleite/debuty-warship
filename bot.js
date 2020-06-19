@@ -71,6 +71,8 @@ client.on('message', async message => {
 			console.log('User was not on the music channel.')
 			message.reply('You need to join the music channel first!');
 		}
+	} else if (command === 'skip') {
+		
 	}
 });
 
@@ -110,7 +112,10 @@ async function Execute(message, music, serverQueue) {
 		}
 	} else {
 		serverQueue.songs.push(song);
-		return message.channel.send(song.title + ' has been added to the queue!');
+		const embed = new MessageEmbed()
+			.setColor(0x636466)
+			.setDescription('You need to join the music channel to be able to use this command!')
+		return message.channel.send(embed);
 	}
 }
 
@@ -119,7 +124,6 @@ function Play(guild, music) {
 	
 	if (!music) {
 		console.log('There is no music passed as argument');
-		console.log('music: ' + music);
 		serverQueue.voiceChannel.leave();
 		queue.delete(guild.id);
 	
@@ -131,6 +135,24 @@ function Play(guild, music) {
 		Play(guild, serverQueue.songs[0]);
 	}).on("error", error => console.error('Error: ' + error));
 	
-	serverQueue.textChannel.send(`Start playing: **${music.title}**`);
+	const embed = new MessageEmbed()
+			.setColor(0x636466)
+			.setTitle('Now playing')
+			.setDescription(`[${music.title}](${music.url})`)
+	serverQueue.textChannel.send(embed);
 	console.log('Playing the song');
 }
+
+function Skip(message, serverQueue) {
+	if (!serverQueue) {
+		const embed = new MessageEmbed()
+			.setColor(0x636466)
+			.setDescription('There is no song that I could skip!')
+		return message.channel.send(embed);
+	} serverQueue.connection.dispatcher.end();
+}
+
+function Stop(message, serverQueue) {
+	serverQueue.songs = [];
+	serverQueue.connection.dispatcher.end();
+  }
