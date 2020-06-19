@@ -56,7 +56,7 @@ client.on('message', async message => {
 							.setDescription('https://www.youtube.com/watch?v=' + data.data.items[0].id.videoId)
 							//.setType('link')
 							.setColor(0x636466)
-						message.channel.send(embed);
+						//message.channel.send(embed);
 
 						connection.play(ytdl('https://www.youtube.com/watch?v=' + data.data.items[0].id.videoId, { filter: 'audioonly' }), { type: 'webm/opus' });
 					}
