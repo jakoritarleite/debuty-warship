@@ -27,6 +27,13 @@ client.on('message', message => {
 			.setColor(0x636466)
 		message.channel.send(embed);
 	}
+
+	else if (command === 'play') {
+		if (!message.guild) return;
+
+		console.log(message.member.voice.channel);
+	}
+
 });
 
 client.login(process.env.BOT_TOKEN);
