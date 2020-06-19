@@ -47,7 +47,7 @@ client.on('message', async message => {
 
 		if (message.member.voice.channel && message.member.voice.channel.id == '720457254578683945') {
 			if (args.startsWith('http')) {
-				Execute(args, serverQueue);
+				Execute(message, args, serverQueue);
 			} else {
 				await YouTube.search.list({ part: 'snippet', q: args }, function (err, response) {
 					if (err) console.error('Error: ' + err);
@@ -55,7 +55,7 @@ client.on('message', async message => {
 					if (response) {
 						for (let i = 0; i < response.data.items.length; i++) {
 							if (response.data.items[i].id.videoId != undefined) {
-								Execute('https://www.youtube.com/watch?v=' + response.data.items[i].id.videoId, serverQueue);
+								Execute(message, 'https://www.youtube.com/watch?v=' + response.data.items[i].id.videoId, serverQueue);
 								break;
 							}
 						}
@@ -68,7 +68,7 @@ client.on('message', async message => {
 	}
 });
 
-async function Execute(music, serverQueue) {
+async function Execute(message, music, serverQueue) {
 	const songInfo = await ytdl.getInfo(music);
 	const song = {
 		title: songInfo.title,
