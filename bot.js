@@ -31,7 +31,11 @@ client.on('message', message => {
 	else if (command === 'play') {
 		if (!message.guild) return;
 
-		console.log(message.member.voice.channel);
+		if (message.member.voice.channel && message.member.voice.channel.id == '720457254578683945') {
+			const connection = await message.member.voice.channel.join();
+		} else {
+			message.reply('You need to join the music channel first!');
+		}
 	}
 
 });
