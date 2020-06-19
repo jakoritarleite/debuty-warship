@@ -223,14 +223,16 @@ function Skip(message, serverQueue) {
 			.setColor(0x636466)
 			.setDescription('There is no song that I could skip!')
 		return message.channel.send(embed);
-	} serverQueue.connection.dispatcher.destroy();
+	} serverQueue.connection.dispatcher.end();
 
-	message.react(':ok_hand:');
+	let emoji = message.guild.emojis.find('name', "ok_hand");
+	message.react(emoji);
 }
 
 function Stop(message, serverQueue) {
 	serverQueue.songs = [];
 	serverQueue.connection.dispatcher.destroy();
 
-	message.react(':peach:');
+	let emoji = message.guild.emojis.find('name', "peach");
+	message.react(emoji);
 }
