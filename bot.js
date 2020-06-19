@@ -50,16 +50,16 @@ client.on('message', async message => {
 				if (err) console.error('Error: ' + err);
 					
 				if (data) {
-					for (item in data.data.items) {
-						console.log(item);
-						if (data.data.items[item].id.videoId != undefined) {
-							musicQueue.push('https://www.youtube.com/watch?v=' + data.data.items[item].id.videoId);
+					for (var index = 0; index < data.data.items.length; index++) {
+						console.log(index);
+						if (data.data.items[index].id.videoId != undefined) {
+							musicQueue.push('https://www.youtube.com/watch?v=' + data.data.items[index].id.videoId);
 
 							if (isMusicOn) {
 								const embed = new MessageEmbed()
 									.setColor(0x636466)
 									.setTitle('Queued music')
-									.setDescription('[' + data.data.items[0].snippet.title + ']' + '(https://www.youtube.com/watch?v=' + data.data.items[0].id.videoId + ')')
+									.setDescription('[' + data.data.items[index].snippet.title + ']' + '(https://www.youtube.com/watch?v=' + data.data.items[index].id.videoId + ')')
 								message.channel.send(embed);
 
 								console.log(musicQueue);
@@ -70,7 +70,7 @@ client.on('message', async message => {
 								const embed = new MessageEmbed()
 									.setColor(0x636466)
 									.setTitle('Now playing')
-									.setDescription('[' + data.data.items[0].snippet.title + ']' + '(https://www.youtube.com/watch?v=' + data.data.items[0].id.videoId + ')')
+									.setDescription('[' + data.data.items[index].snippet.title + ']' + '(https://www.youtube.com/watch?v=' + data.data.items[index].id.videoId + ')')
 								message.channel.send(embed);
 
 								break;
@@ -78,8 +78,8 @@ client.on('message', async message => {
 						}
 					}
 
-					for (music in musicQueue) {
-						connection.play(ytdl(musicQueue[music], { filter: 'audioonly' }), { type: 'webm/opus' });
+					for (var index = 0; index < musicQueue.length; index++) {
+						connection.play(ytdl(musicQueue[index], { filter: 'audioonly' }), { type: 'webm/opus' });
 					}
 				}
 			});
