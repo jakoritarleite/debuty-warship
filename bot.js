@@ -1,7 +1,7 @@
 'use strict';
 
 let isMusicOn = false;
-let musicQueue = ['']
+let musicQueue = []
 
 const Google = require('googleapis');
 const ytdl = require('ytdl-core');
@@ -51,7 +51,6 @@ client.on('message', async message => {
 					
 				if (data) {
 					for (var index = 0; index < data.data.items.length; index++) {
-						console.log(index);
 						if (data.data.items[index].id.videoId != undefined) {
 							musicQueue.push('https://www.youtube.com/watch?v=' + data.data.items[index].id.videoId);
 
@@ -61,8 +60,6 @@ client.on('message', async message => {
 									.setTitle('Queued music')
 									.setDescription('[' + data.data.items[index].snippet.title + ']' + '(https://www.youtube.com/watch?v=' + data.data.items[index].id.videoId + ')')
 								message.channel.send(embed);
-
-								console.log(musicQueue);
 
 								break;
 							} else {
@@ -77,16 +74,18 @@ client.on('message', async message => {
 							}
 						}
 					}
-
-					for (var index = 0; index < musicQueue.length; index++) {
-						connection.play(ytdl(musicQueue[index], { filter: 'audioonly' }), { type: 'webm/opus' });
-					}
 				}
 			});
+
+			Play(connection);
 
 		} else {
 			message.reply('You need to join the music channel first!');
 		}
 	}
-
 });
+
+async function Play(connection) {
+	await connection.play(ytdl(musicQueue[0], { filter: 'audioonly' }), { type: 'webm/opus' });
+	musicQueue.slice(0, 1);
+}
