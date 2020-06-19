@@ -81,6 +81,8 @@ async function Execute(message, music, serverQueue) {
 		url: songInfo.video_url
 	};
 
+	console.log('Got song infos for: ' songInfo.title)
+
 	const voiceChannel = message.member.voice.channel;
 	if (!serverQueue) {
 		const queueContruct = {
@@ -93,6 +95,7 @@ async function Execute(message, music, serverQueue) {
 		};
 
 		queue.set(message.guild.id, queueContruct);
+		queueContruct.songs.push(song);
 
 		try {
 			const connection = await voiceChannel.join();
