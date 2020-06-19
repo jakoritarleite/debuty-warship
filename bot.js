@@ -33,6 +33,8 @@ client.on('message', async message => {
 
 		if (message.member.voice.channel && message.member.voice.channel.id == '720457254578683945') {
 			const connection = await message.member.voice.channel.join();
+
+			console.log(message);
 		} else {
 			message.reply('You need to join the music channel first!');
 		}
