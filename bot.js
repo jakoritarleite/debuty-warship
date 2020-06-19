@@ -126,7 +126,7 @@ function Play(guild, music) {
 		return;
 	}
   
-	serverQueue.connection.play(ytdl(music.url), { type: 'opus' }).on("finish", () => {
+	serverQueue.connection.play(ytdl(music.url, { filter: 'audioonly' }), { type: 'opus' }).on("finish", () => {
 		serverQueue.songs.shift();
 		play(guild, serverQueue.songs[0]);
 	}).on("error", error => console.error('Error: ' + error));
