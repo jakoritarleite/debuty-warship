@@ -46,32 +46,27 @@ client.on('message', async message => {
 		if (message.member.voice.channel && message.member.voice.channel.id == '720457254578683945') {
 			const connection = await message.member.voice.channel.join();
 
-			if (args.startsWith('http')) {
-				connection.play(ytdl(args, { filter: 'audioonly' }), { type: 'webm/opus' });
-			}
-			else {
-				YouTube.search.list({ part: 'snippet', q: 'lofi brazil' }, function (err, data) {
-					if (err) console.error('Error: ' + err);
+			YouTube.search.list({ part: 'snippet', q: args }, function (err, data) {
+				if (err) console.error('Error: ' + err);
 					
-					if (data) {
-						if (!isMusicOn) {
-							const embed = new MessageEmbed()
-								.setColor(0x636466)
-								.setTitle('Now playing >')
-								.setDescription('https://www.youtube.com/watch?v=' + data.data.items[0].id.videoId)
-							message.channel.send(embed);
+				if (data) {
+					if (!isMusicOn) {
+						const embed = new MessageEmbed()
+							.setColor(0x636466)
+							.setTitle('Now playing')
+							.setDescription('[' + data.data.items[0].snippet.title + ']' + '(https://www.youtube.com/watch?v=' + data.data.items[0].id.videoId + ')')
+						message.channel.send(embed);
 
-							connection.play(ytdl('https://www.youtube.com/watch?v=' + data.data.items[0].id.videoId, { filter: 'audioonly' }), { type: 'webm/opus' });
+						connection.play(ytdl('https://www.youtube.com/watch?v=' + data.data.items[0].id.videoId, { filter: 'audioonly' }), { type: 'webm/opus' });
 						
-							isMusicOn = true;
+						isMusicOn = true;
 						
-						} else {
-							message.reply('Developing queue function!');
-							console.log(musicQueue);
-						}
+					} else {
+						message.reply('Developing queue function!');
+						console.log(musicQueue);
 					}
-				});
-			}
+				}
+			});
 
 		} else {
 			message.reply('You need to join the music channel first!');
