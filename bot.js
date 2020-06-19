@@ -97,6 +97,24 @@ client.on('message', async message => {
 				.setDescription('You need to join the music channel to be able to use this command!')
 			message.channel.send(embed);
 		}
+	} else if (command === 'resume') {
+		if (message.member.voice.channel && message.member.voice.channel.id == '720457254578683945') {
+			Resume(message, serverQueue);
+		} else {
+			const embed = new MessageEmbed()
+				.setColor(0x636466)
+				.setDescription('You need to join the music channel to be able to use this command!')
+			message.channel.send(embed);
+		}
+	} else if (command === 'pause') {
+		if (message.member.voice.channel && message.member.voice.channel.id == '720457254578683945') {
+			Pause(message, serverQueue);
+		} else {
+			const embed = new MessageEmbed()
+				.setColor(0x636466)
+				.setDescription('You need to join the music channel to be able to use this command!')
+			message.channel.send(embed);
+		}
 	}
 });
 
@@ -166,6 +184,37 @@ function Play(guild, music) {
 		.setDescription(`[${music.title}](${music.url})`)
 	serverQueue.textChannel.send(embed);
 	console.log('Playing the song');
+}
+
+function Pause(message, serverQueue) {
+	if (!serverQueue) {
+		const embed = new MessageEmbed()
+			.setColor(0x636466)
+			.setDescription('There is no song that I could pause!')
+		return message.channel.send(embed);
+	} serverQueue.connection.dispatcher.pause(true);
+
+	const embed = new MessageEmbed()
+		.setColor(0x636466)
+		.setTitle('Now playing')
+		.setDescription('Paused the song.')
+	serverQueue.textChannel.send(embed);
+}
+
+function Resume(message, serverQueue) {
+	if (!serverQueue) {
+		const embed = new MessageEmbed()
+			.setColor(0x636466)
+			.setDescription('There is no song that I could resume!')
+		return message.channel.send(embed);
+	} serverQueue.connection.dispatcher.pause(false);
+
+	const embed = new MessageEmbed()
+		.setColor(0x636466)
+		.setTitle('Now playing')
+		.setDescription('Resumed the song.')
+	serverQueue.textChannel.send(embed);
+
 }
 
 function Skip(message, serverQueue) {
