@@ -55,7 +55,7 @@ client.on('message', async message => {
 				
 					if (response) {
 						for (let i = 0; i < response.data.items.length; i++) {
-							if (response.data.items[i] != undefined) {
+							if (response.data.items[i].id.videoId != undefined) {
 								music = 'https://www.youtube.com/watch?v=' + response.data.items.id.videoId;
 								break;
 							}
@@ -71,6 +71,7 @@ client.on('message', async message => {
 });
 
 async function Play(song, serverQueue) {
+	console.log('song: ' + song);
 	songInfo = await ytdl.getInfo(song);
 	console.log(songInfo);
 
