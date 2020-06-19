@@ -68,12 +68,12 @@ client.on('message', async message => {
 	}
 });
 
-async function Execute(song, serverQueue) {
-	const songInfo = await ytdl.getInfo(song);
+async function Execute(music, serverQueue) {
+	const songInfo = await ytdl.getInfo(music);
 	const song = {
 		title: songInfo.title,
 		url: songInfo.video_url
-	  };
+	};
 
 	if (!serverQueue) {
 		const queueContruct = {
@@ -103,10 +103,10 @@ async function Execute(song, serverQueue) {
 	}
 }
 
-function play(guild, song) {
+function play(guild, music) {
 	const serverQueue = queue.get(guild.id);
 	
-	if (!song) {
+	if (!music) {
 		serverQueue.voiceChannel.leave();
 		queue.delete(guild.id);
 	
@@ -114,7 +114,7 @@ function play(guild, song) {
 	}
   
 	const dispatcher = serverQueue.connection
-		.play(ytdl(song.url))
+		.play(ytdl(music.url), { type: 'webm/opus' })
 		.on("finish", () => {
 			serverQueue.songs.shift();
 			play(guild, serverQueue.songs[0]);
