@@ -51,6 +51,7 @@ client.on('message', async message => {
 					
 				if (data) {
 					for (item in data.data.items) {
+						console.log(item);
 						if (data.data.items[item].id.videoId != undefined) {
 							musicQueue.push('https://www.youtube.com/watch?v=' + data.data.items[item].id.videoId);
 
