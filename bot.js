@@ -1,5 +1,7 @@
 'use strict';
 
+isMusicOn = false; musicQueue = ['']
+
 const Google = require('googleapis');
 const ytdl = require('ytdl-core');
 const { Client, MessageEmbed } = require('discord.js');
@@ -51,14 +53,21 @@ client.on('message', async message => {
 					if (err) console.error('Error: ' + err);
 					
 					if (data) {
-						const embed = new MessageEmbed()
-							.setTitle('Now playing >')
-							.setDescription('https://www.youtube.com/watch?v=' + data.data.items[0].id.videoId)
-							//.setType('link')
-							.setColor(0x636466)
-						//message.channel.send(embed);
+						if (!isMusicOn) {
+							const embed = new MessageEmbed()
+								.setColor(0x636466)
+								.setTitle('Now playing >')
+								.setDescription('https://www.youtube.com/watch?v=' + data.data.items[0].id.videoId)
+							message.channel.send(embed);
 
-						connection.play(ytdl('https://www.youtube.com/watch?v=' + data.data.items[0].id.videoId, { filter: 'audioonly' }), { type: 'webm/opus' });
+							connection.play(ytdl('https://www.youtube.com/watch?v=' + data.data.items[0].id.videoId, { filter: 'audioonly' }), { type: 'webm/opus' });
+						
+							isMusicOn = true;
+						
+						} else {
+							message.reply('Developing queue function!');
+							console.log(musicQueue);
+						}
 					}
 				});
 			}
