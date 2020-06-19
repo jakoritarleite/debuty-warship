@@ -50,6 +50,11 @@ client.on('message', async message => {
 			if (args.startsWith('http')) {
 				console.log('User passed an url as argument');
 				Execute(message, args, serverQueue);
+			} else if (!args) {
+				const embed = new MessageEmbed()
+					.setColor(0x636466)
+					.setDescription('You need to pass a song name or url.')
+				message.channel.send(embed);
 			} else {
 				console.log('User passed an name as argument')
 				await YouTube.search.list({ part: 'snippet', q: args }, function (err, response) {
@@ -69,10 +74,29 @@ client.on('message', async message => {
 			}
 		} else {
 			console.log('User was not on the music channel.')
-			message.reply('You need to join the music channel first!');
+			const embed = new MessageEmbed()
+				.setColor(0x636466)
+				.setDescription('You need to join the music channel to be able to use this command!')
+			message.channel.send(embed);
 		}
 	} else if (command === 'skip') {
-		
+		if (message.member.voice.channel && message.member.voice.channel.id == '720457254578683945') {
+			Skip(message, serverQueue);
+		} else {
+			const embed = new MessageEmbed()
+				.setColor(0x636466)
+				.setDescription('You need to join the music channel to be able to use this command!')
+			message.channel.send(embed);
+		}
+	} else if (command === 'stop') {
+		if (message.member.voice.channel && message.member.voice.channel.id == '720457254578683945') {
+			Stop(message, serverQueue);
+		} else {
+			const embed = new MessageEmbed()
+				.setColor(0x636466)
+				.setDescription('You need to join the music channel to be able to use this command!')
+			message.channel.send(embed);
+		}
 	}
 });
 
@@ -114,7 +138,8 @@ async function Execute(message, music, serverQueue) {
 		serverQueue.songs.push(song);
 		const embed = new MessageEmbed()
 			.setColor(0x636466)
-			.setDescription('You need to join the music channel to be able to use this command!')
+			.setTitle('Added to queue')
+			.setDescription(`[${song.title}](${song.url})`)
 		return message.channel.send(embed);
 	}
 }
