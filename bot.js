@@ -231,7 +231,7 @@ function Skip(message, serverQueue) {
 
 function Stop(message, serverQueue) {
 	serverQueue.songs = [];
-	serverQueue.connection.dispatcher.destroy();
+	serverQueue.connection.dispatcher.end();
 
 	let emoji = message.guild.emojis.find('name', "peach");
 	message.react(emoji);
