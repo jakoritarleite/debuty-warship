@@ -4,7 +4,7 @@ const { Client, MessageEmbed } = require('discord.js');
 const client = new Client();
 
 client.on('ready', () => { console.log('I am ready!') });
-client.on('message', message => {
+client.on('message', async message => {
 	if (!message.content.startsWith(process.env.PREFIX) || !message.guild) return;
 	const command = message.content.split(' ')[0].substr(process.env.PREFIX.length);
 	const args = message.content.split(' ').slice(1).join(' ');
