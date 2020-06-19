@@ -1,6 +1,7 @@
 'use strict';
 
 const Google = require('googleapis');
+const ytdl = require('ytdl-core');
 const { Client, MessageEmbed } = require('discord.js');
 
 const client = new Client();
@@ -42,13 +43,18 @@ client.on('message', async message => {
 		if (message.member.voice.channel && message.member.voice.channel.id == '720457254578683945') {
 			const connection = await message.member.voice.channel.join();
 
-			YouTube.search.list({ part: 'snippet', q: 'lofi brazil' }, function (err, data) {
-				if (err) console.error('Error: ' + err);
-				
-				if (data) {
-				  console.log(data.data.items)
-				}
-			});
+			if (args.startsWith('http')) {
+				connection.play(ytdl(args, { filter: 'audioonly' }));
+			}
+			else {
+				YouTube.search.list({ part: 'snippet', q: 'lofi brazil' }, function (err, data) {
+					if (err) console.error('Error: ' + err);
+					
+					if (data) {
+						connection.play(ytdl(data.data.items[0], { filter: 'audioonly' }));
+					}
+				});
+			}
 
 		} else {
 			message.reply('You need to join the music channel first!');
