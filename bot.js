@@ -50,7 +50,7 @@ client.on('message', async message => {
 				Play(args, serverQueue);
 			} else {
 				let music = '';
-				await YouTube.search.list({ part: 'snippet', q: song }, function (err, response) {
+				await YouTube.search.list({ part: 'snippet', q: args }, function (err, response) {
 					if (err) console.error('Error: ' + err);
 				
 					if (response) {
