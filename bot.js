@@ -126,13 +126,11 @@ function Play(guild, music) {
 		return;
 	}
   
-	serverQueue.connection
-		.play(ytdl(music.url), { type: 'webm/opus' })
-		.on("finish", () => {
-			serverQueue.songs.shift();
-			play(guild, serverQueue.songs[0]);
-		})
-		.on("error", error => console.error('Error: ' + error));
-	serverQueue.textChannel.send(`Start playing: **${music}**`);
+	serverQueue.connection.play(ytdl(music.url), { type: 'opus' }).on("finish", () => {
+		serverQueue.songs.shift();
+		play(guild, serverQueue.songs[0]);
+	}).on("error", error => console.error('Error: ' + error));
+	
+	serverQueue.textChannel.send(`Start playing: **${music.title}**`);
 	console.log('Playing the song');
 }
