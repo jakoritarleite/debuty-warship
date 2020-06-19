@@ -161,9 +161,9 @@ function Play(guild, music) {
 	}).on("error", error => console.error('Error: ' + error));
 	
 	const embed = new MessageEmbed()
-			.setColor(0x636466)
-			.setTitle('Now playing')
-			.setDescription(`[${music.title}](${music.url})`)
+		.setColor(0x636466)
+		.setTitle('Now playing')
+		.setDescription(`[${music.title}](${music.url})`)
 	serverQueue.textChannel.send(embed);
 	console.log('Playing the song');
 }
@@ -175,9 +175,13 @@ function Skip(message, serverQueue) {
 			.setDescription('There is no song that I could skip!')
 		return message.channel.send(embed);
 	} serverQueue.connection.dispatcher.end();
+
+	message.react(':ok_hand:');
 }
 
 function Stop(message, serverQueue) {
 	serverQueue.songs = [];
 	serverQueue.connection.dispatcher.end();
-  }
+
+	message.react(':peach:');
+}
