@@ -55,7 +55,7 @@ client.on('message', async message => {
 
 async function Play(song, serverQueue) {
 	if (!song.startsWith('http')) {
-		await YouTube.search.list({ part: 'snippet', q: args }, async function (err, response) {
+		await YouTube.search.list({ part: 'snippet', q: song }, async function (err, response) {
 			if (err) console.error('Error: ' + err);
 		
 			if (response) {
