@@ -61,8 +61,6 @@ client.on('message', async message => {
 						}
 					}
 				});
-				//console.log('music: ' + music);
-				//Play(music, serverQueue);
 			}
 		} else {
 			message.reply('You need to join the music channel first!');
@@ -71,8 +69,7 @@ client.on('message', async message => {
 });
 
 async function Play(song, serverQueue) {
-	console.log('song: ' + song);
-	songInfo = await ytdl.getInfo(song);
+	let songInfo = await ytdl.getInfo(song);
 	console.log(songInfo);
 
 }
