@@ -35,10 +35,10 @@ client.on('message', async message => {
 		if (message.member.voice.channel && message.member.voice.channel.id == '720457254578683945') {
 			const connection = await message.member.voice.channel.join();
 
-			await YouTube('lo fi', {maxResults: 1}, async function(error, response) {
+			await YouTube('lo fi', {maxResults: 1, key: process.env.YOUTUBE_KEY}, async function(error, response) {
 				if(error) return console.log(error);
 				 
-				console.dir(results);
+				console.log(results);
 			});
 
 		} else {
