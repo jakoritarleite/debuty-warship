@@ -49,7 +49,7 @@ client.on('message', async message => {
 			if (args.startsWith('http')) {
 				Play(args, serverQueue);
 			} else {
-				let song;
+				let music = '';
 				await YouTube.search.list({ part: 'snippet', q: song }, function (err, response) {
 					if (err) console.error('Error: ' + err);
 				
@@ -57,12 +57,12 @@ client.on('message', async message => {
 						for (let i = 0; i < response.data.items.length; i++) {
 							if (response.data.items[i] != undefined) {
 								song = 'https://www.youtube.com/watch?v=' + response.data.items.id.videoId;
-								
+								break;
 							}
 						}
 					}
 				});
-				Play(song, serverQueue);
+				Play(music, serverQueue);
 			}
 		} else {
 			message.reply('You need to join the music channel first!');
