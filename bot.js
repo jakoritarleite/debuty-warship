@@ -56,7 +56,7 @@ client.on('message', async message => {
 					if (response) {
 						for (let i = 0; i < response.data.items.length; i++) {
 							if (response.data.items[i] != undefined) {
-								song = 'https://www.youtube.com/watch?v=' + response.data.items.id.videoId;
+								music = 'https://www.youtube.com/watch?v=' + response.data.items.id.videoId;
 								break;
 							}
 						}
