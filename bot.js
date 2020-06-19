@@ -54,7 +54,6 @@ client.on('message', async message => {
 					if (err) console.error('Error: ' + err);
 				
 					if (response) {
-						console.log(response.data.items)
 						for (let i = 0; i < response.data.items.length; i++) {
 							if (response.data.items[i].id.videoId != undefined) {
 								music = 'https://www.youtube.com/watch?v=' + response.data.items[i].id.videoId;
@@ -63,6 +62,7 @@ client.on('message', async message => {
 						}
 					}
 				});
+				console.log('music': + music);
 				Play(music, serverQueue);
 			}
 		} else {
