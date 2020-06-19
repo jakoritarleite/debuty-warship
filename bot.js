@@ -206,15 +206,14 @@ function Resume(message, serverQueue) {
 	if (!serverQueue) {
 		const embed = new MessageEmbed()
 			.setColor(0x636466)
-			.setDescription('Experimental feature not working yet.')
+			.setDescription('There is no song that I could resume.')
 		return message.channel.send(embed);
 	} serverQueue.connection.dispatcher.pause();
 
 	const embed = new MessageEmbed()
 		.setColor(0x636466)
-		.setDescription('Resumed the song.')
+		.setDescription('Experimental feature not working yet.')
 	serverQueue.textChannel.send(embed);
-
 }
 
 function Skip(message, serverQueue) {
@@ -225,14 +224,14 @@ function Skip(message, serverQueue) {
 		return message.channel.send(embed);
 	} serverQueue.connection.dispatcher.end();
 
-	let emoji = message.guild.emojis.find('name', "ok_hand");
-	message.react(emoji);
+	//let emoji = message.guild.emojis.find('name', "ok_hand");
+	//message.react(emoji);
 }
 
 function Stop(message, serverQueue) {
 	serverQueue.songs = [];
 	serverQueue.connection.dispatcher.end();
 
-	let emoji = message.guild.emojis.find('name', "peach");
-	message.react(emoji);
+	//let emoji = message.guild.emojis.find('name', "peach");
+	//message.react(emoji);
 }
