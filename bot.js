@@ -99,7 +99,8 @@ client.on('message', async message => {
 		}
 	} else if (command === 'resume') {
 		if (message.member.voice.channel && message.member.voice.channel.id == '720457254578683945') {
-			Resume(message, serverQueue);
+			//Resume(message, serverQueue);
+			console.log('User tried to resume song.');
 		} else {
 			const embed = new MessageEmbed()
 				.setColor(0x636466)
@@ -108,7 +109,8 @@ client.on('message', async message => {
 		}
 	} else if (command === 'pause') {
 		if (message.member.voice.channel && message.member.voice.channel.id == '720457254578683945') {
-			Pause(message, serverQueue);
+			//Pause(message, serverQueue);
+			console.log('User tried to pause song.');
 		} else {
 			const embed = new MessageEmbed()
 				.setColor(0x636466)
@@ -196,8 +198,7 @@ function Pause(message, serverQueue) {
 
 	const embed = new MessageEmbed()
 		.setColor(0x636466)
-		.setTitle('Now playing')
-		.setDescription('Paused the song.')
+		.setDescription('Experimental feature not working yet.')
 	serverQueue.textChannel.send(embed);
 }
 
@@ -205,13 +206,12 @@ function Resume(message, serverQueue) {
 	if (!serverQueue) {
 		const embed = new MessageEmbed()
 			.setColor(0x636466)
-			.setDescription('There is no song that I could resume!')
+			.setDescription('Experimental feature not working yet.')
 		return message.channel.send(embed);
 	} serverQueue.connection.dispatcher.pause();
 
 	const embed = new MessageEmbed()
 		.setColor(0x636466)
-		.setTitle('Now playing')
 		.setDescription('Resumed the song.')
 	serverQueue.textChannel.send(embed);
 
