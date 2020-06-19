@@ -81,7 +81,7 @@ async function Execute(message, music, serverQueue) {
 		url: songInfo.video_url
 	};
 
-	console.log('Got song infos for: ' songInfo.title)
+	console.log('Got song infos for: ' + songInfo.title)
 
 	const voiceChannel = message.member.voice.channel;
 	if (!serverQueue) {
