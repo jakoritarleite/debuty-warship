@@ -1,6 +1,7 @@
 'use strict';
 
-isMusicOn = false; musicQueue = ['']
+let isMusicOn = false;
+let musicQueue = ['']
 
 const Google = require('googleapis');
 const ytdl = require('ytdl-core');
