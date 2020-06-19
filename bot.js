@@ -95,7 +95,7 @@ async function Execute(message, music, serverQueue) {
 		};
 
 		queue.set(message.guild.id, queueContruct);
-		queueContruct.songs.push(song);
+		queueContruct.songs.push(music);
 
 		try {
 			const connection = await voiceChannel.join();
