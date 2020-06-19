@@ -53,7 +53,7 @@ client.on('message', async message => {
 	}
 });
 
-aync function Play(song, serverQueue) {
+async function Play(song, serverQueue) {
 	if (!song.startsWith('http')) {
 		await YouTube.search.list({ part: 'snippet', q: args }, aync function (err, response) {
 			if (err) console.error('Error: ' + err);
