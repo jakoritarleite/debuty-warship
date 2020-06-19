@@ -59,7 +59,7 @@ async function Play(song, serverQueue) {
 			if (err) console.error('Error: ' + err);
 		
 			if (response) {
-				for (int i = 0; i < response.data.items.length; i++) {
+				for (let i = 0; i < response.data.items.length; i++) {
 					if (response.data.items[i] != undefined) {
 						song = 'https://www.youtube.com/watch?v=' + response.data.items.id.videoId;
 						break;
