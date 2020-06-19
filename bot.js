@@ -45,6 +45,7 @@ client.on('message', async message => {
 	else if (command === 'play') {
 		if (!message.guild) return;
 
+		console.log('User entered command: play');
 		if (message.member.voice.channel && message.member.voice.channel.id == '720457254578683945') {
 			if (args.startsWith('http')) {
 				Execute(message, args, serverQueue);
@@ -63,6 +64,7 @@ client.on('message', async message => {
 				});
 			}
 		} else {
+			console.log('User was not on the music channel.')
 			message.reply('You need to join the music channel first!');
 		}
 	}
@@ -89,7 +91,7 @@ async function Execute(message, music, serverQueue) {
 		queue.set(message.guild.id, queueContruct);
 
 		try {
-			var connection = await voiceChannel.join();
+			const connection = await voiceChannel.join();
 			queueContruct.connection = connection;
 			Play(message.guild, queueContruct.songs[0]);
 		} catch (error) {
@@ -114,14 +116,12 @@ function Play(guild, music) {
 		return;
 	}
   
-	const dispatcher = serverQueue.connection
+	serverQueue.connection
 		.play(ytdl(music.url), { type: 'webm/opus' })
 		.on("finish", () => {
 			serverQueue.songs.shift();
 			play(guild, serverQueue.songs[0]);
 		})
 		.on("error", error => console.error(error));
-
-	dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
 	serverQueue.textChannel.send(`Start playing: **${song.title}**`);
 }
