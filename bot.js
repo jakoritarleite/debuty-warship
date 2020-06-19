@@ -6,7 +6,7 @@ const { Client, MessageEmbed } = require('discord.js');
 const client = new Client();
 client.login(process.env.BOT_TOKEN);
 
-const YouTube = Google.youtube_v3.Youtube({
+const YouTube = new Google.youtube_v3.Youtube({
 	version: 'v3',
 	auth: process.env.YOUTUBE_KEY
 });
