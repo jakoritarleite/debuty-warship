@@ -1,8 +1,15 @@
 'use strict';
 
-const YouTube = require('youtube-search');
+const Google = require('googleapis');
 const { Client, MessageEmbed } = require('discord.js');
+
 const client = new Client();
+client.login(process.env.BOT_TOKEN);
+
+const YouTube = google.youtube({
+	version: 'v3',
+	auth: process.env.YOUTUBE_KEY
+});
 
 client.on('ready', () => { console.log('I am ready!') });
 client.on('message', async message => {
@@ -35,10 +42,12 @@ client.on('message', async message => {
 		if (message.member.voice.channel && message.member.voice.channel.id == '720457254578683945') {
 			const connection = await message.member.voice.channel.join();
 
-			await YouTube('lo fi', {maxResults: 1, key: process.env.YOUTUBE_KEY}, async function(error, response) {
-				if(error) return console.log(error);
-				 
-				console.log(results);
+			YouTube.search.list({ part: 'snippet', q: 'lofi brazil' }, function (err, data) {
+				if (err) console.error('Error: ' + err);
+				
+				if (data) {
+				  console.log(data)
+				}
 			});
 
 		} else {
@@ -47,5 +56,3 @@ client.on('message', async message => {
 	}
 
 });
-
-client.login(process.env.BOT_TOKEN);
