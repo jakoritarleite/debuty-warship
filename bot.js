@@ -207,7 +207,7 @@ function Resume(message, serverQueue) {
 			.setColor(0x636466)
 			.setDescription('There is no song that I could resume!')
 		return message.channel.send(embed);
-	} serverQueue.connection.dispatcher.pause(false);
+	} serverQueue.connection.dispatcher.play();
 
 	const embed = new MessageEmbed()
 		.setColor(0x636466)
