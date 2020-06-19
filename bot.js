@@ -75,6 +75,7 @@ async function Execute(message, music, serverQueue) {
 		url: songInfo.video_url
 	};
 
+	const voiceChannel = message.member.voice.channel;
 	if (!serverQueue) {
 		const queueContruct = {
 			textChannel: message.channel,
