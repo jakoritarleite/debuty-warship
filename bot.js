@@ -69,17 +69,3 @@ aync function Play(song, serverQueue) {
 	console.log(songInfo);
 
 }
-
-
-const connection = await message.member.voice.channel.join();
-
-			YouTube.search.list({ part: 'snippet', q: args }, function (err, data) {
-				if (err) console.error('Error: ' + err);
-					
-				if (data) {
-					const embed = new MessageEmbed()
-						.setColor(0x636466)
-						.setTitle('Queued music')
-						.setDescription('[' + data.data.items[index].snippet.title + ']' + '(https://www.youtube.com/watch?v=' + data.data.items[index].id.videoId + ')')
-					message.channel.send(embed);
-			});
