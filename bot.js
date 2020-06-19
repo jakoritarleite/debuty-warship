@@ -54,7 +54,7 @@ client.on('message', async message => {
 						const embed = new MessageEmbed()
 							.setTitle('Now playing >')
 							.setDescription('https://www.youtube.com/watch?v=' + data.data.items[0].id.videoId)
-							.type('link')
+							.setType('link')
 							.setColor(0x636466)
 						message.channel.send(embed);
 
