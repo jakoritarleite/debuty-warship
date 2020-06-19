@@ -48,14 +48,18 @@ client.on('message', async message => {
 		console.log('User entered command: play');
 		if (message.member.voice.channel && message.member.voice.channel.id == '720457254578683945') {
 			if (args.startsWith('http')) {
+				console.log('User passed an url as argument');
 				Execute(message, args, serverQueue);
 			} else {
+				console.log('User passed an name as argument')
 				await YouTube.search.list({ part: 'snippet', q: args }, function (err, response) {
 					if (err) console.error('Error: ' + err);
 				
 					if (response) {
+						console.log('Looking for response results')
 						for (let i = 0; i < response.data.items.length; i++) {
-							if (response.data.items[i].id.videoId != undefined) {
+							if (response.data.items[i].id.videoId !== undefined) {
+								console.log('System found https://www.youtube.com/watch?v=' + response.data.items[i].id.videoId)
 								Execute(message, 'https://www.youtube.com/watch?v=' + response.data.items[i].id.videoId, serverQueue);
 								break;
 							}
@@ -92,10 +96,11 @@ async function Execute(message, music, serverQueue) {
 
 		try {
 			const connection = await voiceChannel.join();
+			console.log('Joined voice channel: ' + voiceChannel);
 			queueContruct.connection = connection;
 			Play(message.guild, queueContruct.songs[0]);
 		} catch (error) {
-			console.error(error);
+			console.error('Error: ' + error);
 			queue.delete(message.guild.id);
 			
 			return message.channel.send(error);
@@ -110,6 +115,8 @@ function Play(guild, music) {
 	const serverQueue = queue.get(guild.id);
 	
 	if (!music) {
+		console.log('There is no music passed as argument');
+		console.log('music: ' + music);
 		serverQueue.voiceChannel.leave();
 		queue.delete(guild.id);
 	
@@ -122,6 +129,7 @@ function Play(guild, music) {
 			serverQueue.songs.shift();
 			play(guild, serverQueue.songs[0]);
 		})
-		.on("error", error => console.error(error));
+		.on("error", error => console.error('Error: ' + error));
 	serverQueue.textChannel.send(`Start playing: **${song.title}**`);
+	console.log('Playing the song');
 }
