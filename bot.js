@@ -46,7 +46,24 @@ client.on('message', async message => {
 		if (!message.guild) return;
 
 		if (message.member.voice.channel && message.member.voice.channel.id == '720457254578683945') {
-			Play(args, serverQueue)
+			if (args.startsWith('http')) {
+				Play(args, serverQueue);
+			} else {
+				let song;
+				await YouTube.search.list({ part: 'snippet', q: song }, function (err, response) {
+					if (err) console.error('Error: ' + err);
+				
+					if (response) {
+						for (let i = 0; i < response.data.items.length; i++) {
+							if (response.data.items[i] != undefined) {
+								song = 'https://www.youtube.com/watch?v=' + response.data.items.id.videoId;
+								
+							}
+						}
+					}
+				});
+				Play(song, serverQueue);
+			}
 		} else {
 			message.reply('You need to join the music channel first!');
 		}
@@ -54,22 +71,7 @@ client.on('message', async message => {
 });
 
 async function Play(song, serverQueue) {
-	if (!song.startsWith('http')) {
-		await YouTube.search.list({ part: 'snippet', q: song }, function (err, response) {
-			if (err) console.error('Error: ' + err);
-		
-			if (response) {
-				for (let i = 0; i < response.data.items.length; i++) {
-					if (response.data.items[i] != undefined) {
-						song = 'https://www.youtube.com/watch?v=' + response.data.items.id.videoId;
-						break;
-					}
-				}
-			}
-		});
-	}
-
-	const songInfo = await ytdl.getInfo(song);
+	songInfo = await ytdl.getInfo(song);
 	console.log(songInfo);
 
 }
