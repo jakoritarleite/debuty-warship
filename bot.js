@@ -1,5 +1,6 @@
 'use strict';
 
+const YouTube = require('youtube-search');
 const { Client, MessageEmbed } = require('discord.js');
 const client = new Client();
 
@@ -34,7 +35,12 @@ client.on('message', async message => {
 		if (message.member.voice.channel && message.member.voice.channel.id == '720457254578683945') {
 			const connection = await message.member.voice.channel.join();
 
-			console.log(message);
+			await YouTube('lo fi', {maxResults: 1}, async function(error, response) {
+				if(error) return console.log(error);
+				 
+				console.dir(results);
+			});
+
 		} else {
 			message.reply('You need to join the music channel first!');
 		}
