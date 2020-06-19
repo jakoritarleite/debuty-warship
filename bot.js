@@ -207,7 +207,7 @@ function Resume(message, serverQueue) {
 			.setColor(0x636466)
 			.setDescription('There is no song that I could resume!')
 		return message.channel.send(embed);
-	} serverQueue.connection.dispatcher.play();
+	} serverQueue.connection.dispatcher.pause();
 
 	const embed = new MessageEmbed()
 		.setColor(0x636466)
@@ -223,14 +223,14 @@ function Skip(message, serverQueue) {
 			.setColor(0x636466)
 			.setDescription('There is no song that I could skip!')
 		return message.channel.send(embed);
-	} serverQueue.connection.dispatcher.end();
+	} serverQueue.connection.dispatcher.destroy();
 
 	message.react(':ok_hand:');
 }
 
 function Stop(message, serverQueue) {
 	serverQueue.songs = [];
-	serverQueue.connection.dispatcher.end();
+	serverQueue.connection.dispatcher.destroy();
 
 	message.react(':peach:');
 }
