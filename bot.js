@@ -104,7 +104,7 @@ async function Execute(message, music, serverQueue) {
 	}
 }
 
-function play(guild, music) {
+function Play(guild, music) {
 	const serverQueue = queue.get(guild.id);
 	
 	if (!music) {
