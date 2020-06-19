@@ -46,7 +46,7 @@ client.on('message', async message => {
 				if (err) console.error('Error: ' + err);
 				
 				if (data) {
-				  console.log(data)
+				  console.log(data.data.items)
 				}
 			});
 
