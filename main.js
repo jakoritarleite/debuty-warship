@@ -10,6 +10,6 @@ const Commands = {
 
 module.exports = {
     main: async function (message, command, args) {
-        args ? await Commands[command](message, args) : await Commands[command](message);
+        await Commands[command](message, args)
     }
 }
