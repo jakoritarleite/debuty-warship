@@ -1,5 +1,5 @@
-async function Main() {
-    console.log('User insert ' + command + ' command with ' + args + ' args');
+module.exports = {
+    main: async function () {
+        console.log('WTFFF');
+    }
 }
-
-module.exports = Main();
