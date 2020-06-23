@@ -1,5 +1,3 @@
-'use strict';
-
 const { Client, Message } = require('discord.js');
 const DClient = new Client();
 
