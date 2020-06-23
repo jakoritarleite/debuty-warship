@@ -13,5 +13,7 @@ DClient.on('message', async message => {
     const Command = message.content.split(' ')[0].substr(process.env.PREFIX.length);
     const Arguments = message.content.split(' ').slice(1).join(' ');
 
-    Command !== "" ? Robot.main(Command, Arguments) : null;
+    if (Command) {
+        Robot.main(Command, Arguments);
+    }
 });
