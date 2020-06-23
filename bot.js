@@ -14,6 +14,8 @@ DClient.on('message', async message => {
     const Arguments = message.content.split(' ').slice(1).join(' ');
 
     if (Command) {
-        Robot.main(Command, Arguments);
+        await Robot.main(Command, Arguments);
     }
 });
+
+DClient.login(process.env.BOT_TOKEN);
