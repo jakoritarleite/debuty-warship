@@ -1,5 +1,5 @@
 module.exports = {
-    main: async function () {
+    main: async function (command, args) {
         console.log('WTFFF');
     }
 }
