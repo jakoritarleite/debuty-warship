@@ -10,6 +10,10 @@ const Commands = {
 
 module.exports = {
     main: async function (message, command, args) {
-        await Commands[command](message, args)
+        try { 
+            await Commands[command](message, args)
+        } catch (Error) {
+            console.log(Error.message);
+        }
     }
 }
