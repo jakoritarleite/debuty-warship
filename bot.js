@@ -4,7 +4,7 @@ const { Client, Message } = require('discord.js');
 const DClient = new Client();
 
 const Robot = {
-    main: require('./main.js');
+    main: require('./main.js')
 }
 
 DClient.on('ready', () => { console.log('I am ready!') });
