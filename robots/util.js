@@ -1,7 +1,10 @@
 const { Message } = require("discord.js")
 
 module.exports = {
-    ping: async function (Message) {
-        Message.reply('Pong :ping_pong:');
+    ping: async function (message) {
+        message.reply('Pong :ping_pong:');
+    },
+    hello: async function (message) {
+        message.reply('Hi');
     }
 }
