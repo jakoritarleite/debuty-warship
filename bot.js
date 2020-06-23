@@ -9,7 +9,7 @@ DClient.on('message', async message => {
     const Arguments = message.content.split(' ').slice(1).join(' ');
 
     if (Command) {
-        await Main(Command, Arguments);
+        await Main();
     }
 });
 

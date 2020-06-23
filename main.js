@@ -1,4 +1,4 @@
-async function Main(command, args) {
+async function Main() {
     console.log('User insert ' + command + ' command with ' + args + ' args');
 }
 
