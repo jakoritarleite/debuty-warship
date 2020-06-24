@@ -44,7 +44,7 @@ async function play(message, args) {
         connection.play(ytdl(Server.get('songs')[0], { filter: 'audioonly' }), { type: 'webm/opus' })
         .on('finish', () => {
             songsQueue.shift(); Server.set('songs', songsQueue);
-            play(message, music)
+            play(message, Server.get('songs')[0])
         })
         .on('error', Error => console.error('Error: ' + Error.message))
 
