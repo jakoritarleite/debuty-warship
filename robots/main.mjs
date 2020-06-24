@@ -1,8 +1,9 @@
-import { ping as _ping, hello as _hello } from './util.mjs';
+import { ping as _ping, pong as _pong, hello as _hello } from './util.mjs';
 import { join as _join, play as _play } from './music.mjs';
 
 const Commands = {
     ping: _ping,
+    pong: _pong,
     hello: _hello,
     join: _join,
     play: _play
