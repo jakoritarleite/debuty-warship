@@ -1,4 +1,4 @@
-import { Client, Message } from 'discord.js';
+import { Client } from 'discord.js';
 const DClient = new Client();
 import { main } from './robots/main.mjs';
 
