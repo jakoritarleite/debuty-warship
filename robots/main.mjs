@@ -13,6 +13,7 @@ export async function main(message, command, args) {
         await Commands[command](message, args);
     }
     catch (Error) {
+        if (Error.message === 'Commands[command] is not a function') return;
         console.log(Error.message);
     }
 }
