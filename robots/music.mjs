@@ -41,7 +41,7 @@ async function play(message, args) {
         
         await addQueue(message, music);
 
-        connection.play(ytdl(Server.get('songs')[0], { filter: 'audioonly' }))
+        connection.play(ytdl(Server.get('songs')[0], { filter: 'audioonly' }), { type: 'webm/opus' })
         .on('finish', () => {
             songsQueue.shift(); Server.set('songs', songsQueue);
             play(message, music)
