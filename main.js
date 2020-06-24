@@ -1,19 +1,18 @@
-const Util = require('./robots/util');
-const Music = require('./robots/music');
+import { ping as _ping, hello as _hello } from './robots/util';
+import { join as _join, play as _play } from './robots/music';
 
 const Commands = {
-    ping: Util.ping,
-    hello: Util.hello,
-    join: Music.join,
-    play: Music.play
+    ping: _ping,
+    hello: _hello,
+    join: _join,
+    play: _play
 }
 
-module.exports = {
-    main: async function (message, command, args) {
-        try { 
-            await Commands[command](message, args)
-        } catch (Error) {
-            console.log(Error.message);
-        }
+export async function main(message, command, args) {
+    try {
+        await Commands[command](message, args);
+    }
+    catch (Error) {
+        console.log(Error.message);
     }
 }
