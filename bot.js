@@ -1,6 +1,6 @@
 const { Client, Message } = require('discord.js');
 const DClient = new Client();
-const Main = require('./main');
+const Main = require('./robots/main.mjs');
 
 DClient.on('ready', () => { console.log('I am ready!') });
 
