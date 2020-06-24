@@ -5,7 +5,7 @@
 	"main": "bot.js",
 	"engines": {
 		"node": "14.4.0",
-		"npm": "*"
+		"npm": "6.14.5"
 	},
 	"scripts": {
 		"start": "node bot.js"
@@ -28,7 +28,6 @@
 		"@discordjs/opus": "^0.3.2",
 		"discord.js": "^12.2.0",
 		"googleapis": "^52.1.0",
-		"opusscript": "0.0.7",
 		"ytdl-core": "^2.1.7"
 	}
 }
