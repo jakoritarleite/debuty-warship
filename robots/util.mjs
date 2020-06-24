@@ -3,6 +3,6 @@ export async function ping(message, args) {
     console.log('Ping` to user');
 }
 export async function hello(message, args) {
-    message.reply('Hi');
+    message.reply('Hi ?');
     console.log('Saying hi to user');
 }
